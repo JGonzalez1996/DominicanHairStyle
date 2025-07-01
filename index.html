@@ -289,6 +289,129 @@
 
   <script src="https://unpkg.com/scrollreveal"></script>
 </head>
+<script>
+  const translations = {
+    es: {
+      nav: ["Inicio", "Servicios", "Trabajos", "Agendar cita", "Contacto", "Preguntas Frecuentes", "Instagram"],
+      bienvenidaTitle: "Bienvenida",
+      bienvenida: "💇‍♀️✨ ¿Lista para un cambio de look ✨💁‍♀️\nAquí se viene a brillar, renovar y dejar tu cabellera tal como lo has soñado\n¿Quieres un color que te represente? ¿Un alisado que dure? ¿Un corte que diga “aquí estoy yo”?\n¡Pues llegaste al lugar perfecto! 🔥\n🎨 Colores | ✂️ Cortes | 💆‍♀️ Alisados\nTodo con cariño, estilo y full actitud 💖\n📲 Escríbeme y agenda tu cita\nTu cabello merece lo mejor… ¡y tú también! 😍",
+      servicios: "Servicios",
+      servicio1: "Recorte de cabello personalizado",
+      servicio2: "Coloraciones modernas",
+      servicio3: "Tratamientos capilares",
+      trabajos: "Trabajos Realizados",
+      cita: "Agendar tu cita",
+      citaTexto: "Reserva tu cita fácilmente desde el calendario:",
+      contacto: "Contáctame",
+      contactoForm: {
+        nombre: "Nombre:",
+        correo: "Correo electrónico:",
+        telefono: "Teléfono:",
+        mensaje: "Mensaje:",
+        placeholderNombre: "Tu nombre",
+        placeholderCorreo: "ejemplo@correo.com",
+        placeholderTelefono: "(123) 456-7890",
+        placeholderMensaje: "Escribe tu mensaje aquí...",
+        enviar: "Enviar"
+      },
+      faq: "Preguntas Frecuentes",
+      ubicacion: "Ubicación",
+      instagram: "Síguenos en Instagram",
+      testimonio1: "“Me encantó el servicio, súper profesional y amable. ¡Volveré pronto!” – Carla M.",
+      testimonio2: "“Mi cabello nunca se había visto tan bien. 100% recomendado.” – Luisa R.",
+      testimonios: "Lo que dicen nuestras clientas"
+    },
+    en: {
+      nav: ["Home", "Services", "Work", "Book Now", "Contact", "FAQ", "Instagram"],
+      bienvenidaTitle: "Welcome",
+      bienvenida: "💇‍♀️✨ Ready for a new look? ✨💁‍♀️\nCome shine, refresh, and get the hair of your dreams!\nWant a color that represents you? A straightening that lasts? A cut that says “here I am”?\nYou’re in the right place! 🔥\n🎨 Colors | ✂️ Cuts | 💆‍♀️ Straightening\nAll with love, style, and full attitude 💖\n📲 Message me and book your appointment\nYour hair deserves the best… and so do you! 😍",
+      servicios: "Services",
+      servicio1: "Personalized haircut",
+      servicio2: "Modern coloring",
+      servicio3: "Hair treatments",
+      trabajos: "Our Work",
+      cita: "Book Your Appointment",
+      citaTexto: "Easily book your appointment from the calendar:",
+      contacto: "Contact Me",
+      contactoForm: {
+        nombre: "Name:",
+        correo: "Email:",
+        telefono: "Phone:",
+        mensaje: "Message:",
+        placeholderNombre: "Your name",
+        placeholderCorreo: "example@email.com",
+        placeholderTelefono: "(123) 456-7890",
+        placeholderMensaje: "Write your message here...",
+        enviar: "Send"
+      },
+      faq: "Frequently Asked Questions",
+      ubicacion: "Location",
+      instagram: "Follow us on Instagram",
+      testimonio1: "“Loved the service, super professional and kind. Will come back soon!” – Carla M.",
+      testimonio2: "“My hair has never looked this good. 100% recommended.” – Luisa R.",
+      testimonios: "What our clients say"
+    }
+  };
+
+  function applyTranslations(lang) {
+    const t = translations[lang];
+
+    // Menú navegación
+    const navLinks = document.querySelectorAll("nav ul li a");
+    navLinks.forEach((el, i) => el.textContent = t.nav[i]);
+
+    // Secciones
+    document.querySelector("#bienvenida h2").textContent = t.bienvenidaTitle;
+    document.querySelector("#bienvenida p").textContent = t.bienvenida;
+
+    document.querySelector("#servicios h2").textContent = t.servicios;
+    const items = document.querySelectorAll("#servicios ul li");
+    if (items.length >= 3) {
+      items[0].textContent = t.servicio1;
+      items[1].textContent = t.servicio2;
+      items[2].textContent = t.servicio3;
+    }
+
+    document.querySelector("#trabajos h2").textContent = t.trabajos;
+    document.querySelector("#agenda h2").textContent = t.cita;
+    document.querySelector("#agenda p").textContent = t.citaTexto;
+    document.querySelector("#contacto h2").textContent = t.contacto;
+
+    // Formulario
+    document.querySelector("label[for='name']").textContent = t.contactoForm.nombre;
+    document.querySelector("#name").placeholder = t.contactoForm.placeholderNombre;
+    document.querySelector("label[for='email']").textContent = t.contactoForm.correo;
+    document.querySelector("#email").placeholder = t.contactoForm.placeholderCorreo;
+    document.querySelector("label[for='phone']").textContent = t.contactoForm.telefono;
+    document.querySelector("#phone").placeholder = t.contactoForm.placeholderTelefono;
+    document.querySelector("label[for='message']").textContent = t.contactoForm.mensaje;
+    document.querySelector("#message").placeholder = t.contactoForm.placeholderMensaje;
+    document.querySelector("button[type='submit']").textContent = t.contactoForm.enviar;
+
+    // FAQ
+    document.querySelector("#faq h2").textContent = t.faq;
+
+    // Ubicación
+    document.querySelector("#mapa h2").textContent = t.ubicacion;
+
+    // Instagram
+    document.querySelector("#instagram-feed h2").textContent = t.instagram;
+
+    // Testimonios
+    document.querySelector("#testimonios h2").textContent = t.testimonios;
+    const testimonios = document.querySelectorAll("#testimonios .swiper-slide blockquote");
+    if (testimonios.length >= 2) {
+      testimonios[0].textContent = t.testimonio1;
+      testimonios[1].textContent = t.testimonio2;
+    }
+  }
+
+  window.addEventListener("DOMContentLoaded", () => {
+    const browserLang = navigator.language || navigator.userLanguage;
+    const lang = browserLang.startsWith("es") ? "es" : "en";
+    applyTranslations(lang);
+  });
+</script>
 <body>
 
   <!-- Loader -->
@@ -382,7 +505,7 @@ Tu cabello merece lo mejor… ¡y tú también! 😍</p>
     <section id="contacto" class="contacto">
       <h2>Contáctame</h2>
       <form
-        action="https://formspree.io/f/mjkrlpby"
+        action="https://formspree.io/f/yourFormID"
 
         method="POST"
         style="max-width: 400px; margin: auto; text-align: left;"
@@ -672,7 +795,6 @@ Tu cabello merece lo mejor… ¡y tú también! 😍</p>
     
     <div class="social-icons">
       <a href="https://www.instagram.com/tu_usuario" target="_blank"><i class="fab fa-instagram"></i></a>
-      <a href="https://www.tiktok.com/@tu_usuario" target="_blank"><i class="fab fa-tiktok"></i></a>
     </div>
   </footer>
 
